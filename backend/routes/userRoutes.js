@@ -28,7 +28,7 @@ router.post("/register", asyncHandler(async (req, res) => {
 
     const user = await User.create({name , email, password});
 
-    if(user){
+    if(user){ 
         res.status(201).json({
             _id : user.id,
             name : user.name,
