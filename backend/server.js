@@ -17,7 +17,7 @@ app.use((cors()));
 //Routes
 app.use("/api/users", userRoutes);
 
-//test route
+//test route  
 app.get("/", (req, res)=>{
     res.send("api is running..");
 })
