@@ -19,8 +19,14 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) => {
     res.send(`Get product with id ${req.params.id}`);
 });
+// GET /api/products   -> public
+router.route("/").get(getProducts).post(protect, admin, createProduct );
 
-router.route("/").get(getProducts).post(protect, )
+
+// GET /api/products   -> public
+
+router.route("/:id").get(getProductById).put(protect, admin, updateProduct);
+
 
 
 export default router;
