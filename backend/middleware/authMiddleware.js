@@ -13,6 +13,7 @@ if (authHeader && authHeader.toString().trim().startsWith("Bearer ")) {
         req.user = await User.findById(decoded.id).select("-password");
         next();
     } catch (error) {
+        console.log("error : ", error);
         res.status(401);
         throw new Error("Not authorized, token failed");
     }

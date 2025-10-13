@@ -1,0 +1,39 @@
+curl -X POST http://localhost:5000/api/products \
+ -H "Content-Type: application/json" \
+ -H "Authorization: Bearer <TOKEN>" \
+ -d '{
+   "name":"Test Product",
+   "price":999,
+   "description":"A test product",
+   "image":"/images/test.jpg",
+   "brand":"TestBrand",
+   "category":"electronics",
+   "countInStock":10
+ }'
+
+
+ POST http://localhost:5000/api/users/login
+Headers: Content-Type: application/json
+Body:
+{
+  "email": "admin@example.com",
+  "password": "123456"
+}
+
+
+{
+  "_id": "68ec9cb1c3044d5b5310ca5c",
+  "name": "admin",
+  "email": "admin@example.com",
+  "isAdmin": true,
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZWM5Y2IxYzMwNDRkNWI1MzEwY2E1YyIsImlhdCI6MTc2MDMzNzIwOSwiZXhwIjoxNzYyOTI5MjA5fQ.kIV2ABK19F__JyYzUY00_cWzemR8Brpfkvv7zGZjpxY"
+}
+
+
+for update  
+curl -X PUT http://localhost:5000/api/products/<PRODUCT_ID> \
+ -H "Content-Type: application/json" \
+ -H "Authorization: Bearer <TOKEN>" \
+ -d '{"price":899, "countInStock": 15}'
+
+
