@@ -12,9 +12,9 @@ function App(){
       <Layout>
           <Routes>
             <Route path="/" element={<Homepage/>} />
-            <Route path="/" element={<ProductPage/>} />
-            <Route path="/" element={<LoginPage/>} />
-            <Route path="/" element={<CartPage/>} />
+            <Route path="/product/:id" element={<ProductPage/>} />
+            <Route path="/Login" element={<LoginPage/>} />
+            <Route path="/cart" element={<CartPage/>} />
           </Routes>
       </Layout>
     </Router>
