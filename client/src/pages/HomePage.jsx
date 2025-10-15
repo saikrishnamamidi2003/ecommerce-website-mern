@@ -11,7 +11,18 @@ const HomePage = () =>{
         const fetchProduts = async () => {
             try{
                 const response = await axios.get("/api/products");
-                setProducts(response.data);
+
+                if(Array.isArray(response.data)){
+                    setProducts(response.data);
+                }
+                else if(Array.isArray(response.data.products)){
+                    setProducts(response.data.products);
+                }
+                else {
+                    setProducts([]);
+                }
+
+                //setProducts(response.data);
                 setLoading(false);
             }
             catch(error){
