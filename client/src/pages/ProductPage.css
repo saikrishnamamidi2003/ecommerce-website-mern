@@ -1,0 +1,16 @@
+.product-page {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+}
+
+.product-page-image {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.product-details {
+  max-width: 600px;
+}
