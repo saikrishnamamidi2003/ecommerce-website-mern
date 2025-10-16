@@ -1,50 +1,68 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./ProductPage.css";
-import {CartContext} from "..//context/CartContext"
+import { CartContext } from "../context/CartContext";
 
-const ProductPage = () =>{
-  const {id} = useParams();
+const ProductPage = () => {
+  const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
-  const {addToCart} = useContext(CartContext);
+  const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useContext(CartContext);
 
-  // useEffect(() =>{
-  //   axios.get(`/api/products/${id}`).then((res) => setProduct(res.data));
-  // }, [id]);
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await axios.get(`/api/products/${id}`);
+        setProduct(response.data);
+      } catch (error) {
+        console.error("Error fetching product:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProduct();
+  }, [id]);
 
-  useEffect(
-    () =>{
-      const fetchProduct = async ()=> {
-        try{
-          const response = await axios.get(`/api/products/${id}`);
-          setProduct(response.data);
-          setLoading(false);
-        }
-        catch (error){
-          console.log("Error fetching product:", error);
-          setLoading(false);
-        }
-      };
-      fetchProduct();
-    }, [id]
-  );
-
-  if(loading) return <di>Loading product...</di>
-  if(!product) return <div>Product not found!</div>
+  if (loading) return <div>Loading product...</div>;
+  if (!product) return <div>Product not found!</div>;
 
   return (
     <div className="product-page">
-      <img src={product.image} alt={product.name} className="product-page-image" />
+      <div className="product-image-section">
+        <img
+          src={product.image}
+          alt={product.name}
+          className="product-page-image"
+        />
+      </div>
+
       <div className="product-details">
         <h2>{product.name}</h2>
-        <p>Price : ₹{product.price} </p>
-        <p>{product.description}</p>
+        <p className="product-price">Price: ₹{product.price}</p>
+        <p className="product-description">{product.description}</p>
+
+        <div className="quantity-section">
+          <label htmlFor="quantity">Quantity:</label>
+          <input
+            type="number"
+            id="quantity"
+            min="1"
+            value={quantity}
+            onChange={(e) => setQuantity(Number(e.target.value))}
+          />
+        </div>
+
+        <button
+          className="add-to-cart-btn"
+          onClick={() => addToCart(product, quantity)}
+        >
+          🛒 Add to Cart
+        </button>
       </div>
     </div>
   );
-
 };
 
 export default ProductPage;
