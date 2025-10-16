@@ -11,7 +11,7 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await axios.get("/api/orders/myorders", {
+        const res = await axios.get("http://localhost:5000/api/orders/myorders", {
           headers: { Authorization: `Bearer ${user.token}` },
         });
         setOrders(res.data);

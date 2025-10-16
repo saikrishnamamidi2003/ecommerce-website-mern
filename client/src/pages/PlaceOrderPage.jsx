@@ -18,7 +18,7 @@ const PlaceOrderPage = () => {
         totalPrice,
       };
 
-      const res = await axios.post("/api/orders", orderData);
+      const res = await axios.post("http://localhost:5000/api/orders", orderData);
       
       // ✅ Clear cart after success
       setCart([]);

@@ -7,7 +7,7 @@ const OrderDetailsPage = () => {
   const [order, setOrder] = useState(null);
 
   useEffect(() => {
-    axios.get(`/api/orders/${id}`).then((res) => setOrder(res.data));
+    axios.get(`http://localhost:5000/api/orders/${id}`).then((res) => setOrder(res.data));
   }, [id]);
 
   if (!order) return <p>Loading order details...</p>;

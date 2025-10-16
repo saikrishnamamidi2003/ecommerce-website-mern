@@ -16,7 +16,7 @@ const RegisterPage = () =>{
     const handleReister = async (e) =>{
         e.preventDefault();
         try{
-            const response = await axios.post("api/auth/register", {name, email, password});
+            const response = await axios.post("http://localhost:5000/api/users/register", {name, email, password});
 
            // Assuming backend returns { user, token } after registration
            loginUser(response.data.user, response.data.token);
@@ -31,7 +31,7 @@ const RegisterPage = () =>{
     return (
         <div style={styles.container} >
             <h2>Register</h2>
-            {error && <p style = {Styles.error}>{error}</p>}
+            {error && <p style = {styles.error}>{error}</p>}
             <form onSubmit={handleReister}  style={styles.form}>
             <input
             type = "text"

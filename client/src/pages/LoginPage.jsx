@@ -14,7 +14,7 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/auth/login", { email, password });
+      const response = await axios.post("http://localhost:5000/api/users/login", { email, password });
 
       // Assuming response.data has { user, token }
       loginUser(response.data.user, response.data.token);
