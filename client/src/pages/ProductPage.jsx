@@ -1,12 +1,18 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./ProductPage.css";
+import {CartContext} from "..//context/CartContext"
 
 const ProductPage = () =>{
   const {id} = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const {addToCart} = useContext(CartContext);
+
+  // useEffect(() =>{
+  //   axios.get(`/api/products/${id}`).then((res) => setProduct(res.data));
+  // }, [id]);
 
   useEffect(
     () =>{
