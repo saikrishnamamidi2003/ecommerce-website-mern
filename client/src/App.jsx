@@ -4,7 +4,7 @@ import Layout from "./components/Layout";
 import Homepage from "./pages/HomePage.jsx";
 import ProductPage from "./pages/ProductPage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
-import CartPage from "./pages/CartrPage.jsx";
+import CartPage from "./pages/CartPage.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
 
 import ShippingPage from "./pages/ShippingPage";

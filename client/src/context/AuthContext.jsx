@@ -4,16 +4,21 @@ import React, { createContext, useState, useEffect } from "react";
 export const AuthContext = createContext();
 
 // 2. Create Provider
-export const AuthProvider = ({ children }) => {
+  export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(() => {
-    // Load user from localStorage on app start
-    const storedUser = localStorage.getItem("user");
-    return storedUser ? JSON.parse(storedUser) : null;
+    try {
+      const storedUser = localStorage.getItem("user");
+      if (!storedUser || storedUser === "undefined") return null;
+      return JSON.parse(storedUser);
+    } catch (error) {
+      console.error("Failed to parse stored user:", error);
+      localStorage.removeItem("user");
+      return null;
+    }
   });
 
-  const [token, setToken] = useState(() => {
-    return localStorage.getItem("token") || null;
-  });
+  const [token, setToken] = useState(localStorage.getItem("token") || null);
+
 
   // Function to login and save user/token
   const loginUser = (userData, jwtToken) => {
