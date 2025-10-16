@@ -3,12 +3,12 @@ import ProductCard from "../components/ProductCard";
 
 export const CartContext = createContext();
 
-export const CartProvider = ({Children}) => {
+export const CartProvider = ({children}) => {
     const [cart, setCart] = useState([]);
 
     // ✅ Load cart from localStorage on first render
     useEffect( ()=>{
-        const storedCart = loacalStorage.getItem("cart");
+        const storedCart = localStorage.getItem("cart");
         if(storedCart){
             setCart(JSON.parse(storedCart));
         }
@@ -22,7 +22,7 @@ export const CartProvider = ({Children}) => {
     }, [cart]);
 
     //Add product to cart
-    const addTocart = (Product, qty = 1) =>{
+    const addToCart = (Product, qty = 1) =>{
         setCart((prevCart) => {
             const existing = prevCart.find( (item) => item.id == ProductCard.id );
             if(existing){

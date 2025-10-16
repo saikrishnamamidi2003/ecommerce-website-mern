@@ -12,7 +12,6 @@ import PlaceOrderPage from "./pages/PlaceOrderPage";
 import OrderDetailsPage from "./pages/OrderDetailsPage";
 function App(){
   return (
-    <Router>
       <Layout>
           <Routes>
             <Route path="/" element={<Homepage/>} />
@@ -20,12 +19,11 @@ function App(){
             <Route path="/login" element={<LoginPage/>} />
              <Route path="/register" element={<RegisterPage />} />
             <Route path="/cart" element={<CartPage/>} />
-             <Route path="/shipping" element={<ShippingPage />} />
-  <Route path="/placeorder" element={<PlaceOrderPage />} />
-  <Route path="/order/:id" element={<OrderDetailsPage />} />
+            <Route path="/shipping" element={<ShippingPage />} />
+            <Route path="/placeorder" element={<PlaceOrderPage />} />
+            <Route path="/order/:id" element={<OrderDetailsPage />} />
           </Routes>
       </Layout>
-    </Router>
   );
 }
 
