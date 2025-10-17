@@ -10,7 +10,7 @@ const Layout = ({ children }) => {
 
   const toggleMenu = () => setShowMenu(!showMenu); // fixed here
 
-  return (
+  return(
     <div>
       <header style={styles.header}>
         <Link to="/">Home</Link>
