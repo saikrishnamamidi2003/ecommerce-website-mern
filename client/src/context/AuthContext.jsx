@@ -4,7 +4,7 @@ import React, { createContext, useState, useEffect } from "react";
 export const AuthContext = createContext();
 
 // 2. Create Provider
-  export const AuthProvider = ({ children }) => {
+  export const AuthProvider = ({ children }) => { 
   const [user, setUser] = useState(() => {
     try {
       const storedUser = localStorage.getItem("user");

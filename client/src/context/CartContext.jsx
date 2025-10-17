@@ -1,4 +1,4 @@
-import React, {createContext, useState, useEffect, Children} from "react";
+import React, {createContext, useState, useEffect, children} from "react";
 import ProductCard from "../components/ProductCard";
 
 export const CartContext = createContext();
