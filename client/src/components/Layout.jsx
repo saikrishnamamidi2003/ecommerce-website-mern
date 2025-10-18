@@ -26,7 +26,8 @@ const Layout = ({ children }) => {
             <div style={styles.userMenu}>
               <div style={{ position: "relative" }}>
                 <button onClick={toggleMenu} style={styles.profileBtn}>
-                   👤 {user?.name || user?.username} {/* ✅ safer check */}
+                   👤 {user?.name } 
+                  {user?.isAdmin && "(Admin)"}
                 </button>
                 {showMenu && (
                   <div style={styles.dropdownMenu}>
