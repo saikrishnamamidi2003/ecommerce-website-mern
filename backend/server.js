@@ -17,7 +17,7 @@ const app = express();
 //middleware
 
 app.use(express.json());
-app.use((cors()));
+app.use(cors());
 
 //Routes
 app.use("/api/users", userRoutes);
@@ -25,6 +25,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes)
 app.use("/api/orders", orderRoutes)
 
+//error handling
 app.use(notFound);
 app.use(errorHandler);
 

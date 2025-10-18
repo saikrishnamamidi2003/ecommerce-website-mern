@@ -38,7 +38,7 @@ const Layout = ({ children }) => {
               </div>
             </div>
           )}
-          <Link to="/cart">Cart</Link>
+          <Link to="/cart">🛒Cart</Link>
         </nav>
       </header>
 

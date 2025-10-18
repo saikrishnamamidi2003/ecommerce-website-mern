@@ -26,7 +26,7 @@ Body:
   "name": "admin",
   "email": "admin@example.com",
   "isAdmin": true,
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZWM5Y2IxYzMwNDRkNWI1MzEwY2E1YyIsImlhdCI6MTc2MDMzNzIwOSwiZXhwIjoxNzYyOTI5MjA5fQ.kIV2ABK19F__JyYzUY00_cWzemR8Brpfkvv7zGZjpxY"
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZWM5Y2IxYzMwNDRkNWI1MzEwY2E1YyIsImlhdCI6MTc2MDc4ODc2MiwiZXhwIjoxNzYzMzgwNzYyfQ.j5rbs5dcJdGnc7MZchv4V9sbnAqpNvGxDB6-_p095pw"
 }
 
 
@@ -39,3 +39,22 @@ curl -X PUT http://localhost:5000/api/products/<PRODUCT_ID> \
 
 
 68ed07928e174c09ce06c4bd
+
+
+
+{
+  "user": "68ec9cb1c3044d5b5310ca5c",
+  "name": "Laptop",
+  "image": "https://github.com/saikrishnamamidi2003/Login-mern-JWT/blob/main/images/image.png",
+  "category": "Electronics",
+  "description": "Sample product",
+  "rating": 0,
+  "numReviews": 0,
+  "price": 50000,
+  "countInStock": 5,
+  "_id": "68f383e1bfb14179f29a9a61",
+  "reviews": [],
+  "createdAt": "2025-10-18T12:11:13.863Z",
+  "updatedAt": "2025-10-18T12:11:13.863Z",
+  "__v": 0
+}

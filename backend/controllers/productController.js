@@ -54,7 +54,7 @@ const createProduct = asyncHandler(async (req, res) => {
      });
 
      const createdProduct = await product.save();
-     res.status(201).json(createProduct);
+     res.status(201).json(createdProduct);
 });
 
 
@@ -78,7 +78,7 @@ const updateProduct = asyncHandler(async (req, res)=> {
 
 
         const updatedProduct = await product.save();
-        res.json(updateProduct);
+        res.json(updatedProduct);
     }
     else {
         res.status(404);
