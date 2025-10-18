@@ -10,6 +10,8 @@ import RegisterPage from "./pages/RegisterPage.jsx";
 import ShippingPage from "./pages/ShippingPage";
 import PlaceOrderPage from "./pages/PlaceOrderPage";
 import OrderDetailsPage from "./pages/OrderDetailsPage";
+import AdminProductsPage from "./pages/AdminProductsPage.jsx";
+
 function App(){
   return (
       <Layout>
@@ -22,6 +24,7 @@ function App(){
             <Route path="/shipping" element={<ShippingPage />} />
             <Route path="/placeorder" element={<PlaceOrderPage />} />
             <Route path="/order/:id" element={<OrderDetailsPage />} />
+            <Route path="/adminProductsPage" element={<AdminProductsPage />} />
           </Routes>
       </Layout>
   );

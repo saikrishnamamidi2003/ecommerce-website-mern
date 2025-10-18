@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import Header from "./Header";
 import Footer from "./Footer";
+import AdminProductsPage from "../pages/AdminProductsPage";
 
 const Layout = ({ children }) => {
   const { user, logoutUser } = useContext(AuthContext);
@@ -27,7 +28,9 @@ const Layout = ({ children }) => {
               <div style={{ position: "relative" }}>
                 <button onClick={toggleMenu} style={styles.profileBtn}>
                    👤 {user?.name } 
-                  {user?.isAdmin && "(Admin)"}
+                  {user?.isAdmin && "(Admin)"
+                  
+                  && <Link to="/adminProductsPage"> Edit Products</Link>}
                 </button>
                 {showMenu && (
                   <div style={styles.dropdownMenu}>
