@@ -99,6 +99,7 @@ router.route("/").get(getProducts).post(protect, admin, createProduct );
 // GET /api/products   -> public
 
 router.route("/:id").get(getProductById).put(protect, admin, updateProduct);
+router.route("/:id").delete(protect, admin, deleteProduct); // ✅ Delete product
 
 
 
