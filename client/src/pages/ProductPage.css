@@ -14,3 +14,18 @@
 .product-details {
   max-width: 600px;
 }
+
+.added-message {
+  color: green;
+  font-weight: bold;
+  margin-top: 10px;
+  animation: fadeOut 1s ease-in-out;
+}
+.added-message.fade-out {
+  opacity: 0;
+}
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}

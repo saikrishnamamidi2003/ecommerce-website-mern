@@ -10,12 +10,13 @@ const ProductPage = () => {
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useContext(CartContext);
-
+  const [addedMessage, setAddedMessage] = useState("");
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/api/products/${id}`);
         setProduct(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error("Error fetching product:", error);
       } finally {
@@ -56,10 +57,15 @@ const ProductPage = () => {
 
         <button
           className="add-to-cart-btn"
-          onClick={() => addToCart(product, quantity)}
+          onClick={() =>{ addToCart(product, quantity);
+            setAddedMessage("✅ Added to cart!");
+            setTimeout( ()=>setAddedMessage(""),1000); 
+          }
+          }
         >
           🛒 Add to Cart
         </button>
+        {addedMessage && <p className="added-message">{addedMessage}</p>}
       </div>
     </div>
   );
