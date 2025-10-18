@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -15,12 +15,15 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const response = await axios.post("http://localhost:5000/api/users/login", { email, password });
-
+       console.log("Login response:", response.data);
       // Assuming response.data has { user, token }
-      loginUser(response.data.user, response.data.token);
+    loginUser(
+  { _id: response.data._id, name: response.data.name, email: response.data.email, isAdmin: response.data.isAdmin },
+  response.data.token
+);
 
-      // Redirect to home page
-      navigate("/");
+    //console.log("name : ",response.data.name);
+     navigate("/"); // 👈 wait 100ms for re-render
     } catch (err) {
       console.error(err);
       setError("Invalid email or password");

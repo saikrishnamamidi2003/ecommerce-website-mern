@@ -6,6 +6,7 @@ import Footer from "./Footer";
 
 const Layout = ({ children }) => {
   const { user, logoutUser } = useContext(AuthContext);
+  console.log(user);
   const [showMenu, setShowMenu] = useState(false); // dropdown toggle // fixed here
 
   const toggleMenu = () => setShowMenu(!showMenu); // fixed here
@@ -25,7 +26,7 @@ const Layout = ({ children }) => {
             <div style={styles.userMenu}>
               <div style={{ position: "relative" }}>
                 <button onClick={toggleMenu} style={styles.profileBtn}>
-                  👤 {user.username}
+                   👤 {user?.name || user?.username} {/* ✅ safer check */}
                 </button>
                 {showMenu && (
                   <div style={styles.dropdownMenu}>
