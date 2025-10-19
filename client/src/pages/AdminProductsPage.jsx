@@ -1,107 +1,168 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
+import { AuthContext } from "../context/AuthContext"; // ✅ get admin token
+import "./AdminProductsPage.css";
 
 const AdminProductsPage = () => {
   const [products, setProducts] = useState([]);
-  const [newProduct, setNewProduct] = useState({
-    name: "",
-    price: "",
-    description: "",
-    countInStock: "",
-    image: "",
-  });
+  const [name, setName] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState("");
   const [message, setMessage] = useState("");
-  const user = JSON.parse(localStorage.getItem("user"));
-  const token = user?.token;
+  const { user } = useContext(AuthContext); // ✅ admin user from context
 
-  // Fetch products
+  // Fetch all products
   const fetchProducts = async () => {
-    const { data } = await axios.get("http://localhost:5000/api/products");
-    setProducts(data);
+    try {
+      const { data } = await axios.get("http://localhost:5000/api/products");
+      console.log(data);
+      setProducts(data);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
   };
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
-  // Add product
+  // ✅ Add Product
   const addProduct = async (e) => {
     e.preventDefault();
+    // if (!user?.token || !user?.isAdmin) {
+    //   alert("Only admin can add products!");
+    //   return;
+    // }
+
     try {
-      await axios.post("http://localhost:5000/api/products", newProduct, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const { data } = await axios.post(
+        "http://localhost:5000/api/products",
+        { name, price, description, image },
+        {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
       setMessage("✅ Product added successfully!");
-      setTimeout(() => setMessage(""), 3000); // auto hide after 3s
-      fetchProducts();
-      setNewProduct({ name: "", price: "", description: "", countInStock: "", image: "" });
+      setProducts([...products, data]);
+      setName("");
+      setPrice("");
+      setDescription("");
+      setImage("");
+      setTimeout(() => setMessage(""), 2000);
     } catch (error) {
-      alert("Error adding product");
+      console.error("Error adding product:", error);
+      setMessage("❌ Error adding product!");
     }
   };
 
-  // Delete product
+  // ✅ Delete Product
   const deleteProduct = async (id) => {
+    // if (!user?.token || !user?.isAdmin) {
+    //   alert("Only admin can delete products!");
+    //   return;
+    // }
+
     if (window.confirm("Are you sure you want to delete this product?")) {
-      await axios.delete(`http://localhost:5000/api/products/${id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setMessage("🗑 Product deleted!");
-      setTimeout(() => setMessage(""), 3000);
-      fetchProducts();
+      try {
+        await axios.delete(`http://localhost:5000/api/products/${id}`, {
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
+        setProducts(products.filter((p) => p._id !== id)); // remove deleted product
+        setMessage("🗑️ Product deleted successfully!");
+        setTimeout(() => setMessage(""), 2000);
+      } catch (error) {
+        console.error("Error deleting product:", error);
+        setMessage("❌ Error deleting product!");
+      }
     }
   };
 
   return (
-    <div className="admin-products">
-      <h2>Admin Product Management</h2>
-      {message && <p style={{ color: "green" }}>{message}</p>}
+    <div className="admin-products-page">
+      <h1>Admin Products Dashboard</h1>
 
-      {/* Add product form */}
-      <form onSubmit={addProduct}>
-        <input
-          type="text"
-          placeholder="Product Name"
-          value={newProduct.name}
-          onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
-        />
-        <input
-          type="number"
-          placeholder="Price"
-          value={newProduct.price}
-          onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
-        />
-        <input
-          type="text"
-          placeholder="Description"
-          value={newProduct.description}
-          onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
-        />
-        <input
-          type="number"
-          placeholder="Stock"
-          value={newProduct.countInStock}
-          onChange={(e) => setNewProduct({ ...newProduct, countInStock: e.target.value })}
-        />
-        <input
-          type="text"
-          placeholder="Image URL"
-          value={newProduct.image}
-          onChange={(e) => setNewProduct({ ...newProduct, image: e.target.value })}
-        />
-        <button type="submit">Add Product</button>
-      </form>
+      {message && <p className="admin-message">{message}</p>}
 
-      {/* Product list */}
-      <h3>All Products</h3>
-      {products.map((p) => (
-        <div key={p._id}>
-          <p>
-            {p.name} — ₹{p.price}
-            <button onClick={() => deleteProduct(p._id)}>Delete</button>
-          </p>
-        </div>
-      ))}
+      <div className="add-product-section">
+        <h2>Add New Product</h2>
+        <form onSubmit={addProduct} className="add-product-form">
+          <input
+            type="text"
+            placeholder="Product Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+          <input
+            type="number"
+            placeholder="Price"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Image URL"
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+            required
+          />
+          <textarea
+            placeholder="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          ></textarea>
+          <button type="submit" className="add-btn">
+            ➕ Add Product
+          </button>
+        </form>
+      </div>
+
+      <div className="product-list-section">
+        <h2>All Products</h2>
+        <table className="product-table">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Price (₹)</th>
+              <th>Description</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {products.map((p) => (
+              <tr key={p._id}>
+                <td>
+                  <img
+                    src={p.image}
+                    alt={p.name}
+                    className="admin-product-img"
+                  />
+                </td>
+                <td>{p.name}</td>
+                <td>{p.price}</td>
+                <td>{p.description}</td>
+                <td>
+                  <button
+                    className="delete-btn"
+                    onClick={() => deleteProduct(p._id)}
+                  >
+                    🗑️ Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
