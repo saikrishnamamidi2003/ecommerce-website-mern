@@ -67,10 +67,20 @@ const AdminProductsPage = () => {
     // }
 
     if (window.confirm("Are you sure you want to delete this product?")) {
+
       try {
+
+
+        const token = localStorage.getItem("token");
+    if (!token) {
+      console.error("No token found. Please log in as admin.");
+      return;
+    }
+    //console.log(token);
+    console.log("id: ",id);
         await axios.delete(`http://localhost:5000/api/products/${id}`, {
           headers: {
-            Authorization: `Bearer ${user.token}`,
+             Authorization: token, 
           },
         });
         setProducts(products.filter((p) => p._id !== id)); // remove deleted product

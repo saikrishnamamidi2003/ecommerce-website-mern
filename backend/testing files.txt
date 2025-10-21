@@ -26,9 +26,8 @@ Body:
   "name": "admin",
   "email": "admin@example.com",
   "isAdmin": true,
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZWM5Y2IxYzMwNDRkNWI1MzEwY2E1YyIsImlhdCI6MTc2MDc4ODc2MiwiZXhwIjoxNzYzMzgwNzYyfQ.j5rbs5dcJdGnc7MZchv4V9sbnAqpNvGxDB6-_p095pw"
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4ZWM5Y2IxYzMwNDRkNWI1MzEwY2E1YyIsImlhdCI6MTc2MTA2NjI2NCwiZXhwIjoxNzYzNjU4MjY0fQ.lH6k6H9iQ0OEyJV8Di_t-Rgz8Y74041b4GrPxXOiNr8"
 }
-
 
 for update  
 curl -X PUT http://localhost:5000/api/products/<PRODUCT_ID> \

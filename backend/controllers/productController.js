@@ -61,7 +61,7 @@ const createProduct = asyncHandler(async (req, res) => {
 // @desc Delete a product
 // @route DELETE /api/products/:id
 // @access Admin
-export const deleteProduct = asyncHandler(async (req, res) => {
+const deleteProduct = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
 
   if (product) {
@@ -101,4 +101,4 @@ const updateProduct = asyncHandler(async (req, res)=> {
     }
 });
 
-export {getProducts, getProductById, createProduct, updateProduct };
+export {getProducts, getProductById, createProduct, updateProduct, deleteProduct };
