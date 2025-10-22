@@ -13,6 +13,11 @@ const CartPage = () => {
       <h2>Shopping Cart</h2>
       {cart.map((item) => (
         <div key={item._id} style={{ borderBottom: "1px solid #ccc", margin: "10px 0" }}>
+           <img
+            src={item.image} // fixed here
+            alt={item.name}
+            style={{ width: "100px", height: "100px", objectFit: "cover", marginRight: "15px" }}
+          />
           <h3>{item.name}</h3>
           <p>₹{item.price}</p>
           <input
