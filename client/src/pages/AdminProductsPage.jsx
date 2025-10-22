@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import { AuthContext } from "../context/AuthContext"; // ✅ get admin token
+import { AuthContext } from "../context/AuthContext"; 
 import "./AdminProductsPage.css";
 
 const AdminProductsPage = () => {
@@ -27,6 +27,8 @@ const AdminProductsPage = () => {
     fetchProducts();
   }, []);
 
+  //const user = JSON.parse(localStorage.getItem("user"));
+
   // ✅ Add Product
   const addProduct = async (e) => {
     e.preventDefault();
@@ -36,12 +38,14 @@ const AdminProductsPage = () => {
     // }
 
     try {
+          const token = localStorage.getItem("token");
+
       const { data } = await axios.post(
         "http://localhost:5000/api/products",
         { name, price, description, image },
         {
           headers: {
-            Authorization: `Bearer ${user.token}`,
+            Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
         }
@@ -61,6 +65,8 @@ const AdminProductsPage = () => {
 
   // ✅ Delete Product
   const deleteProduct = async (id) => {
+    // const user = JSON.parse(localStorage.getItem("user"));
+
     // if (!user?.token || !user?.isAdmin) {
     //   alert("Only admin can delete products!");
     //   return;
@@ -80,7 +86,7 @@ const AdminProductsPage = () => {
     console.log("id: ",id);
         await axios.delete(`http://localhost:5000/api/products/${id}`, {
           headers: {
-             Authorization: token, 
+              Authorization: `Bearer ${token}`,
           },
         });
         setProducts(products.filter((p) => p._id !== id)); // remove deleted product
