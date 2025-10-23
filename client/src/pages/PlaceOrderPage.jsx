@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { CartContext } from "../context/CartContext";
+import API_URL from "../api";
 
 const PlaceOrderPage = () => {
   const { cart, setCart } = useContext(CartContext);
@@ -18,7 +19,7 @@ const PlaceOrderPage = () => {
         totalPrice,
       };
 
-      const res = await axios.post("http://localhost:5000/api/orders", orderData);
+      const res = await axios.post(API_URL + "/api/orders", orderData);
       
       // ✅ Clear cart after success
       setCart([]);

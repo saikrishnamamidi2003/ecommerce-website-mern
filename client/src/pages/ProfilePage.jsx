@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
+import API_URL from "../api";
 
 const ProfilePage = () => {
   const { user } = useContext(AuthContext);
@@ -11,7 +12,7 @@ const ProfilePage = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/orders/myorders", {
+        const res = await axios.get(API_URL + "/api/orders/myorders", {
           headers: { Authorization: `Bearer ${user.token}` },
         });
         setOrders(res.data);

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import ProductCard from "../components/ProductCard";
 import "./HomePage.css";
+import API_URL from "../api";
 
 const HomePage = () =>{
     const [products, setProducts] = useState([]); //state to store products
@@ -10,7 +11,7 @@ const HomePage = () =>{
     useEffect(()=>{
         const fetchProduts = async () => {
             try{
-                const response = await axios.get("http://localhost:5000/api/products");
+                const response = await axios.get(API_URL + "/api/products");
 
                 if(Array.isArray(response.data)){
                     setProducts(response.data);

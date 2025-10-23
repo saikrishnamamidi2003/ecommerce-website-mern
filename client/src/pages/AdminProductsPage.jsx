@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext"; 
 import "./AdminProductsPage.css";
-
+import API_URL from "../api";
 const AdminProductsPage = () => {
   const [products, setProducts] = useState([]);
   const [name, setName] = useState("");
@@ -15,7 +15,7 @@ const AdminProductsPage = () => {
   // Fetch all products
   const fetchProducts = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/products");
+      const { data } = await axios.get( API_URL +"/api/products");
       console.log(data);
       setProducts(data);
     } catch (error) {
@@ -41,7 +41,7 @@ const AdminProductsPage = () => {
           const token = localStorage.getItem("token");
 
       const { data } = await axios.post(
-        "http://localhost:5000/api/products",
+         API_URL +"/api/products",
         { name, price, description, image },
         {
           headers: {
@@ -84,7 +84,7 @@ const AdminProductsPage = () => {
     }
     //console.log(token);
     console.log("id: ",id);
-        await axios.delete(`http://localhost:5000/api/products/${id}`, {
+        await axios.delete(`${API_URL}/api/products/${id}`, {
           headers: {
               Authorization: `Bearer ${token}`,
           },

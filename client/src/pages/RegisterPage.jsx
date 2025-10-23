@@ -1,6 +1,6 @@
 import React, {useState, useContext} from "react";
 import axios from "axios";
-
+import API_URL from "../api";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
@@ -16,7 +16,7 @@ const RegisterPage = () =>{
     const handleReister = async (e) =>{
         e.preventDefault();
         try{
-            const response = await axios.post("http://localhost:5000/api/users/register", {name, email, password});
+            const response = await axios.post(API_URL + "/api/users/register", {name, email, password});
 
            // Assuming backend returns { user, token } after registration
            loginUser(response.data.user, response.data.token);
