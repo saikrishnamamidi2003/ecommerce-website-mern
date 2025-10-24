@@ -26,7 +26,9 @@ const ProductPage = () => {
     fetchProduct();
   }, [id]);
 
-  if (loading) return <div>Loading product...</div>;
+  if (loading) return <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <img src= "./images/giphy.gif" alt="Loading..." width="80" />
+    </div>;
   if (!product) return <div>Product not found!</div>;
 
   return (
