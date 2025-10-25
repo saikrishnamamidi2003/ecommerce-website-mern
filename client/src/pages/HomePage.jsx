@@ -36,9 +36,11 @@ const HomePage = () =>{
 
     }, []);
 
-    if(loading){
-        return <div>Loading products...</div>;
-    }
+    if (loading) return (
+  <div style={{ textAlign: "center", marginTop: "50px" }}>
+    <div className="loader"></div>
+  </div>
+);
 
     return (
         <div className="product-grid">
