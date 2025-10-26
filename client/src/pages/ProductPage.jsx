@@ -11,6 +11,76 @@ const ProductPage = () => {
   const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
   const { addToCart } = useContext(CartContext);
+  const [showForm, setShowForm] = useState(false);
+
+  const[form, setForm] = useState(
+    {
+      address: "",
+      city: "",
+      postalCode: "",
+      Phone: "",
+    }
+  );
+
+  const handleChange = (e) => {
+    setForm( {...form, [e.target.name]: e.target.value} );
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const orderData = {
+      orderItems: [
+        {
+          name: product.name,
+          image: product.image,
+          price: product.price,
+          qty: quantity,//product.quantity
+          product: product._id,
+        },
+      ],
+       shippingAddress: {
+      address: form.address,
+      city: form.city,
+      postalCode: form.postalCode,
+      country: "India",
+    },
+    paymentMethod: "COD",
+      totalPrice: product.price * quantity,
+    };
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.error("No token found. Please log in as admin.");
+      return;
+    }
+
+    try{
+    const res = await axios.post(`${API_URL}/api/orders`, orderData, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+     alert("✅ Order placed successfully!");
+  setShowForm(false);
+  console.log("Order response:", res.data);
+  }
+  catch (error){
+      console.error("❌ Order failed:", error.response?.data || error.message);
+  alert("❌ Order failed: " + (error.response?.data?.message || error.message));
+  }
+
+    // const data = await res.json();
+    // if (res.ok) {
+    //   alert("✅ Order placed successfully!");
+    //   setShowForm(false);
+    // } else {
+    //   alert("❌ " + data.message);
+    // }
+  }
+
+
   const [addedMessage, setAddedMessage] = useState("");
   useEffect(() => {
     const fetchProduct = async () => {
@@ -67,7 +137,23 @@ const ProductPage = () => {
         >
           🛒 Add to Cart
         </button>
+
+        <button onClick={() => setShowForm(true)}>Buy Now</button>
+
         {addedMessage && <p className="added-message">{addedMessage}</p>}
+
+        {showForm && (
+        <div className="buy-form">
+          <h3>Enter Shipping Details</h3>
+          <form onSubmit={handleSubmit}>
+            <input name="address" placeholder="Address" onChange={handleChange} required />
+            <input name="city" placeholder="City" onChange={handleChange} required />
+            <input name="postalCode" placeholder="Postal Code" onChange={handleChange} required />
+            <input name="phone" placeholder="Phone Number" onChange={handleChange} required />
+            <button type="submit">Confirm Order</button>
+          </form>
+        </div>
+      )}
       </div>
     </div>
   );

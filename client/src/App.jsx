@@ -11,6 +11,7 @@ import ShippingPage from "./pages/ShippingPage";
 import PlaceOrderPage from "./pages/PlaceOrderPage";
 import OrderDetailsPage from "./pages/OrderDetailsPage";
 import AdminProductsPage from "./pages/AdminProductsPage.jsx";
+import MyOrders from "./components/MyOrder.jsx";
 
 function App(){
   return (
@@ -25,6 +26,7 @@ function App(){
             <Route path="/placeorder" element={<PlaceOrderPage />} />
             <Route path="/order/:id" element={<OrderDetailsPage />} />
             <Route path="/adminProductsPage" element={<AdminProductsPage />} />
+            <Route path="/myorders" element={<MyOrders />} />
           </Routes>
       </Layout>
   );

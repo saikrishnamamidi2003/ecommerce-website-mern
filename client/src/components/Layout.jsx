@@ -7,7 +7,7 @@ import AdminProductsPage from "../pages/AdminProductsPage";
 
 const Layout = ({ children }) => {
   const { user, logoutUser } = useContext(AuthContext);
-  console.log(user);
+  //console.log(user);
   const [showMenu, setShowMenu] = useState(false); // dropdown toggle // fixed here
 
   const toggleMenu = () => setShowMenu(!showMenu); // fixed here
@@ -15,7 +15,7 @@ const Layout = ({ children }) => {
   return(
     <div>
       <header style={styles.header}>
-        <Link to="/">Home</Link>
+        <Link to="/" style={styles.logo}>🏠 Home</Link>
 
         <nav style={styles.nav}>
           {!user ? (
@@ -30,17 +30,29 @@ const Layout = ({ children }) => {
                    👤 {user?.name } 
                   {user?.isAdmin && "(Admin)"
                   
-                  && <Link to="/adminProductsPage"> Edit Products</Link>}
+                  }
                 </button>
                 {showMenu && (
                   <div style={styles.dropdownMenu}>
+                     <Link to="/myorders" style={styles.menuLink}>
+                    📦 My Orders
+                  </Link>
+
+                  {user?.isAdmin && (
+                    <Link to="/adminProductsPage" style={styles.menuLink}>
+                      🛠️ Edit Products
+                    </Link>
+                  )}
+
                     <button onClick={logoutUser} style={styles.logoutBtn}>
-                      Logout
+                     🚪Logout
                     </button>
                   </div>
                 )}
               </div>
             </div>
+            
+
           )}
           <Link to="/cart">🛒Cart</Link>
         </nav>
@@ -87,6 +99,10 @@ const styles = {
     marginTop: "5px",
     boxShadow: "0px 2px 5px rgba(0,0,0,0.2)",
   },
+  menuLink: {
+    textDecoration: "none",
+    color: "#333",
+  },
   logoutBtn: {
     padding: "5px 10px",
     background: "red",
@@ -94,6 +110,11 @@ const styles = {
     border: "none",
     cursor: "pointer",
     width: "100%",
+  },
+  logo: {
+    textDecoration: "none",
+    color: "#000",
+    fontWeight: "bold",
   },
 };
 
