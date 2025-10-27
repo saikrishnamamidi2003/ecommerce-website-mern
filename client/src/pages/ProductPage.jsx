@@ -29,7 +29,7 @@ const ProductPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const orderData = {
-      orderItems: [
+      OrderItems: [
         {
           name: product.name,
           image: product.image,
@@ -62,7 +62,9 @@ const ProductPage = () => {
       },
     });
 
-     alert("✅ Order placed successfully!");
+     //alert("✅ Order placed successfully!");
+     setAddedMessage("✅ Order placed successfully!");
+     setTimeout( ()=>setAddedMessage(""),1000); 
   setShowForm(false);
   console.log("Order response:", res.data);
   }

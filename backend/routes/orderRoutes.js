@@ -7,19 +7,21 @@ import { protect } from "../middleware/authMiddleware.js";
 // @desc    Create new order
 // @route   POST /api/orders
 // @access  Private
-router.post("/", (req, res) => {
-  res.send("Create new order");
-});
+
+// router.post("/", (req, res) => {
+//   res.send("Create new order");
+// });
 
 // @desc    Get order by ID
 // @route   GET /api/orders/:id
 // @access  Private
-router.get("/:id", (req, res) => {
-  res.send(`Get order with id ${req.params.id}`);
-});
+
+// router.get("/:id", (req, res) => {
+//   res.send(`Get order with id ${req.params.id}`);
+// });
 
 router.post("/", protect, addOrderItems);
 router.get("/myorders",protect, getMyOrders);
-router.get("/:id", protect, getMyOrders);
+router.get("/:id", protect, getOrderById);
 
 export default router;
