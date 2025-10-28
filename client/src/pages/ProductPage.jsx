@@ -67,7 +67,7 @@ const ProductPage = () => {
      setTimeout( ()=>setAddedMessage(""),1000); 
   setShowForm(false);
   console.log("Order response:", res.data);
-  }
+  } 
   catch (error){
       console.error("❌ Order failed:", error.response?.data || error.message);
   alert("❌ Order failed: " + (error.response?.data?.message || error.message));
